@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: api
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123445
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+  web:
+    build: .
+    command: gunicorn project.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://admin:123445@db:5432/api
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
+volumes:
+  postgres_data:

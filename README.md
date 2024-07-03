@@ -1,8 +1,8 @@
-# MyProject
+# API
 
 ## Introduction
 
-MyProject is a Django-based API project with JWT authentication, email login with OTP, media file handling, and CRUD operations. The project uses PostgreSQL as the database and follows the MVC pattern.
+API is a Django-based API project with JWT authentication, email login with OTP, media file handling, and CRUD operations. The project uses PostgreSQL as the database and follows the MVC pattern.
 
 ## Features
 
@@ -61,9 +61,32 @@ MyProject is a Django-based API project with JWT authentication, email login wit
 
 ## API Endpoints
 
-Register: POST /api/register/
-OTP Login Request: POST /api/otp-login/
-OTP Login Verify: PUT /api/otp-login/
-Upload Media: POST /api/media/
-List Media: GET /api/media/
-Media Detail: GET, PUT, DELETE /api/media/<id>/
+### User Registration
+
+- **Register a New User**
+  - **Method & Endpoint**: `POST /api/register/`
+  - **Description**: Registers a new user with the provided credentials.
+
+### OTP-Based Authentication
+
+- **Request OTP for Login**
+  - **Method & Endpoint**: `POST /api/otp-login/`
+  - **Description**: Requests an OTP for user login.
+
+- **Verify OTP for Login**
+  - **Method & Endpoint**: `PUT /api/otp-login/`
+  - **Description**: Verifies the OTP and logs in the user.
+
+### Media Management
+
+- **Upload Media**
+  - **Method & Endpoint**: `POST /api/media/`
+  - **Description**: Uploads a new media file.
+
+- **List All Media**
+  - **Method & Endpoint**: `GET /api/media/`
+  - **Description**: Retrieves a list of all media files.
+
+- **Media Detail**
+  - **Method & Endpoint**: `GET, PUT, DELETE /api/media/<id>/`
+  - **Description**: Retrieves, updates, or deletes a specific media file by its ID.

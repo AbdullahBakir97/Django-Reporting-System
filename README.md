@@ -1,8 +1,8 @@
-# API
+# Reporting-System
 
 ## Introduction
 
-API is a robust Django-based RESTful API designed to facilitate a modern reporting system. It integrates essential features including secure JWT authentication, OTP-based email login for heightened security, advanced media file management capabilities, and efficient CRUD operations across various data entities. Developed with PostgreSQL as the database backend, the project follows the Model-View-Controller (MVC) architectural pattern, ensuring scalability, maintainability, and optimal performance.
+Reporting-System is a robust Django-based RESTful API designed to facilitate a modern reporting system. It integrates essential features including secure JWT authentication, OTP-based email login for heightened security, advanced media file management capabilities, and efficient CRUD operations across various data entities. Developed with PostgreSQL as the database backend, the project follows the Model-View-Controller (MVC) architectural pattern, ensuring scalability, maintainability, and optimal performance.
 
 
 ## Features

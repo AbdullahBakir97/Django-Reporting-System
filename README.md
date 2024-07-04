@@ -83,6 +83,10 @@ API is a robust Django-based RESTful API designed to facilitate a modern reporti
 
 # API Documentation
 
+### Swagger UI
+
+API documentation is available using Swagger UI. After starting the development server or Docker containers, navigate to http://localhost:8000/swagger/ to interactively explore and test the API endpoints.
+
 ## API Endpoints
 
 ### Register

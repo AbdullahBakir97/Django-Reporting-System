@@ -2,14 +2,35 @@
 
 ## Introduction
 
-API is a Django-based API project with JWT authentication, email login with OTP, media file handling, and CRUD operations. The project uses PostgreSQL as the database and follows the MVC pattern.
+bust Django-based RESTful API designed to facilitate a modern reporting system. It integrates essential features including secure JWT authentication, OTP-based email login for heightened security, advanced media file management capabilities, and efficient CRUD operations across various data entities. Developed with PostgreSQL as the database backend, the project follows the Model-View-Controller (MVC) architectural pattern, ensuring scalability, maintainability, and optimal performance.
 
 ## Features
 
-- JWT Authentication
-- Email Login with OTP
-- Media File Handling
-- CRUD Operations
+- 🔒 **JWT Authentication**: Securely authenticate users and authorize access.
+- 📧 **Email Login with OTP**: Authenticate users via email using OTP for added security.
+- 🖼️ **Media File Handling**: Upload, retrieve, update, and delete media files (photos, videos, PDFs).
+- 🔄 **CRUD Operations**: Perform CRUD (Create, Read, Update, Delete) operations for users, reports, and media files.
+
+## Functionality
+
+### User Management
+
+- **Register**: Allows users to create a new account using username, email, and password.
+- **OTP Login**: Authenticate users via email OTP for login.
+- **Profile Management**: Update user profile information including full name, date of birth, gender, address, and national ID.
+
+### Media Management
+
+- **Upload Media**: Upload various types of media files (photos, videos, PDFs) to the system.
+- **List Media**: Retrieve a list of all media files uploaded by the authenticated user.
+- **Media Detail**: View details of a specific media file, update its contents, or delete it.
+
+### Reporting
+
+- **Create Report**: Generate reports detailing incidents, including textual description and associated media files.
+- **List Reports**: Retrieve a list of reports submitted by the authenticated user.
+- **Report Detail**: View, update, or delete a specific report including its description and associated media files.
+
 
 ## Requirements
 
@@ -59,34 +80,52 @@ API is a Django-based API project with JWT authentication, email login with OTP,
 2. The application will be accessible at http://localhost:8000.
 
 
+# API Documentation
+
 ## API Endpoints
 
-### User Registration
+### Register
+- **Method**: POST
+- **Endpoint**: `/api/register/`
+- **Description**: Register a new user.
 
-- **Register a New User**
-  - **Method & Endpoint**: `POST /api/register/`
-  - **Description**: Registers a new user with the provided credentials.
+### OTP Login Request
+- **Method**: POST
+- **Endpoint**: `/api/otp-login/`
+- **Description**: Request an OTP for login.
 
-### OTP-Based Authentication
+### OTP Login Verify
+- **Method**: PUT
+- **Endpoint**: `/api/otp-login/`
+- **Description**: Verify OTP and login.
 
-- **Request OTP for Login**
-  - **Method & Endpoint**: `POST /api/otp-login/`
-  - **Description**: Requests an OTP for user login.
+### Upload Media
+- **Method**: POST
+- **Endpoint**: `/api/media/`
+- **Description**: Upload a new media file.
 
-- **Verify OTP for Login**
-  - **Method & Endpoint**: `PUT /api/otp-login/`
-  - **Description**: Verifies the OTP and logs in the user.
+### List Media
+- **Method**: GET
+- **Endpoint**: `/api/media/`
+- **Description**: List all media files of the logged-in user.
 
-### Media Management
+### Media Detail
+- **Method**: GET, PUT, DELETE
+- **Endpoint**: `/api/media/<id>/`
+- **Description**: Retrieve, update, or delete a media file by ID.
 
-- **Upload Media**
-  - **Method & Endpoint**: `POST /api/media/`
-  - **Description**: Uploads a new media file.
+### Create Report
+- **Method**: POST
+- **Endpoint**: `/api/reports/`
+- **Description**: Create a new report with multiple media files.
 
-- **List All Media**
-  - **Method & Endpoint**: `GET /api/media/`
-  - **Description**: Retrieves a list of all media files.
+### List Reports
+- **Method**: GET
+- **Endpoint**: `/api/reports/`
+- **Description**: List all reports of the logged-in user.
 
-- **Media Detail**
-  - **Method & Endpoint**: `GET, PUT, DELETE /api/media/<id>/`
-  - **Description**: Retrieves, updates, or deletes a specific media file by its ID.
+### Report Detail
+- **Method**: GET, PUT, DELETE
+- **Endpoint**: `/api/reports/<id>/`
+- **Description**: Retrieve, update, or delete a report by ID.
+

@@ -8,7 +8,7 @@ class UserAdmin(BaseUserAdmin):
     model = User
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('full_name', 'email', 'date_of_birth', 'place_of_birth', 'gender', 'address', 'national_id')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'full_name', 'email', 'date_of_birth', 'place_of_birth', 'gender', 'address', 'national_id')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
@@ -21,9 +21,14 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
-    list_display = ('username', 'full_name', 'email', 'is_staff')
-    search_fields = ('username', 'full_name', 'email')
+    list_display = ('username', 'first_name', 'last_name', 'full_name', 'email', 'is_staff')
+    search_fields = ('username', 'first_name', 'last_name', 'full_name', 'email')
     ordering = ('username',)
+
+    def full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+    full_name.short_description = _('Full Name')
+
 
 class MediaFileAdmin(admin.ModelAdmin):
     list_display = ('user','file', 'uploaded_at')

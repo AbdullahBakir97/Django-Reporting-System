@@ -99,17 +99,17 @@
         <div class="col-lg-3">
             <div class="row mb-4">
                 <div class="col-lg-12">
-                    <button type="button" class="btn btn-success btn-block" onclick="toggleModal('create-user-modal')">Create User</button>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#create-user-modal">Create User</button>
                 </div>
             </div>
             <div class="row mb-4">
                 <div class="col-lg-12">
-                    <button type="button" class="btn btn-success btn-block" onclick="toggleModal('upload-mediafile-modal')">Upload MediaFile</button>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#upload-mediafile-modal">Upload MediaFile</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <button type="button" class="btn btn-success btn-block" onclick="toggleModal('create-report-modal')">Create Report</button>
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#create-report-modal">Create Report</button>
                 </div>
             </div>
         </div>
@@ -118,15 +118,99 @@
 
 <!-- Modals for Actions -->
 <div id="create-user-modal" class="modal fade" role="dialog">
-    <!-- Create User Modal Content -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create User</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form method="post" action="{% url 'admin:custom_admin_create_user' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="user-username">Username:</label>
+                        <input type="text" id="user-username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email:</label>
+                        <input type="email" id="user-email" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div id="upload-mediafile-modal" class="modal fade" role="dialog">
-    <!-- Upload MediaFile Modal Content -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload MediaFile</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form method="post" action="{% url 'admin:custom_admin_create_mediafile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="mediafile-user">User:</label>
+                        <select id="mediafile-user" name="user" class="form-control">
+                            {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mediafile-file">File:</label>
+                        <input type="file" id="mediafile-file" name="file" class="form-control-file" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Upload MediaFile</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div id="create-report-modal" class="modal fade" role="dialog">
-    <!-- Create Report Modal Content -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Report</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form method="post" action="{% url 'admin:custom_admin_create_report' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="report-user">User:</label>
+                        <select id="report-user" name="user" class="form-control">
+                            {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-description">Description:</label>
+                        <input type="text" id="report-description" name="description" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-place">Place of Report:</label>
+                        <input type="text" id="report-place" name="place_of_report" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- JavaScript for Modals and Collapses -->
@@ -134,135 +218,130 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.min.js"></script>
 <script>
-// Toggle filter section with animation
-$('#filter-toggler').on('click', function() {
-    $('#filter-content').slideToggle();
-});
+    // Toggle filter section with animation
+    $('#filter-toggler').on('click', function() {
+        $('#filter-content').slideToggle();
+    });
 
-// Toggle details function for metric details
-function toggleDetails(detailsId) {
-    $('#' + detailsId).slideToggle();
-}
-
-// Toggle modal function
-function toggleModal(modalId) {
-    $('#' + modalId).modal('toggle');
-}
+    // Toggle details function for metric details
+    function toggleDetails(detailsId) {
+        $('#' + detailsId).slideToggle();
+    }
 </script>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 20px;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+    }
 
-h1 {
-    color: #333;
-    text-align: center;
-}
+    h1 {
+        color: #333;
+        text-align: center;
+    }
 
-.filters-actions {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
+    .filters-actions {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
 
-.filters-actions h2 {
-    color: #555;
-    margin-bottom: 20px;
-}
+    .filters-actions h2 {
+        color: #555;
+        margin-bottom: 20px;
+    }
 
-.list-group {
-    margin-bottom: 20px;
-}
+    .list-group {
+        margin-bottom: 20px;
+    }
 
-.list-group-item {
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-}
+    .list-group-item {
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+    }
 
-.card {
-    margin-bottom: 20px;
-}
+    .card {
+        margin-bottom: 20px;
+    }
 
-.modal-content {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    .modal-content {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.modal-header {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-}
+    .modal-header {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
 
-.modal-title {
-    color: #333;
-}
+    .modal-title {
+        color: #333;
+    }
 
-.modal-body {
-    padding: 20px;
-}
+    .modal-body {
+        padding: 20px;
+    }
 
-.modal-footer {
-    padding: 15px;
-    border-top: 1px solid #ddd;
-    text-align: right;
-}
+    .modal-footer {
+        padding: 15px;
+        border-top: 1px solid #ddd;
+        text-align: right;
+    }
 
-.btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-}
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+    }
 
-.btn-primary {
-    background-color: #007bff;
-    color: white;
-}
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-}
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-}
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
 
-.btn-danger:hover {
-    background-color: #c82333;
-}
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
 
-.btn-success {
-    background-color: #28a745;
-    color: white;
-}
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
 
-.btn-success:hover {
-    background-color: #218838;
-}
+    .btn-success:hover {
+        background-color: #218838;
+    }
 
-.btn-link {
-    background-color: transparent;
-    color: #007bff;
-    text-decoration: underline;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
+    .btn-link {
+        background-color: transparent;
+        color: #007bff;
+        text-decoration: underline;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
 
-.btn-link:hover {
-    text-decoration: none;
-}
+    .btn-link:hover {
+        text-decoration: none;
+    }
 </style>
 
 {% endblock %}

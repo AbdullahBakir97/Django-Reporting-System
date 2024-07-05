@@ -45,8 +45,8 @@ Reporting-System is a robust Django-based RESTful API designed to facilitate a m
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/myproject.git
-   cd myproject
+   git clone https://github.com/AbdullahBakir97/Django-Reporting-System/.git
+   cd Django-Reporting-System
    ```
 
 2. Install dependencies:
